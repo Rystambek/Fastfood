@@ -1,14 +1,25 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fastfood </title>
-</head>
-<body>
-  <h1>Axmedov Aslbek</h1>
-</body>
-</html>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% block title %}
+FASTFOOD
+{% endblock title %}
+
+{% block content %}
+<main>
+  <div class="card">
+    <img src="" alt="Burger">
+    <h2>Burger</h2>
+    <p>Lezzatli va chiroyli burgerlarimiz!</p>
+    <span class="price">$5.99</span>
+    <div class="buttons">
+      <button class="create-btn">Create</button>
+      <button class="update-btn">Update</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+  <!-- Boshqa mahsulotlar uchun bunga o'xshash cardlar -->
+</main>
+{% endblock content %}
