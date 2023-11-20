@@ -15,9 +15,7 @@ class Food(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
     price = models.DecimalField(max_digits=100000, decimal_places=2)
-    address = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=17)
-    tg_username = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

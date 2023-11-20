@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %}
+
+{% block title %}
+FASTFOOD  - login
+{% endblock title %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <h3>Login</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Email or Phone" id="username">
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password">
+
+
+    <button type="submit">Log In</button>
+</form>
+{% endblock content %}
