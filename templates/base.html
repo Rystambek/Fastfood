@@ -45,19 +45,20 @@
                               </form>
                           </li>
                       </ul>
-                      {% if request.user.is_authenticated %}
                       <ul class="nav navbar-nav navbar-right">
                           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                          {% if request.user.is_authenticated %}
                           <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
                               <ul class="dropdown-menu">
-                                  <li><a href="{% url "login" %}">Login</a></li>
-                                  <li><a href="#">Sign Up</a></li>
+                                  {% comment %} <li><a href="#">Login</a></li>
+                                  <li><a href="#">Sign Up</a></li> {% endcomment %}
+                                  <li><a href="{% url "users:signup" %}">Logout</a></li>
                               </ul>
                           </li>
                       </ul>
                       {% else %}
-                      <a href="#" class="btn btn-primary">Login</a>
-                      <a href="#" class="btn btn-primary">Signup</a>
+                      <a href="{% url "login" %}" class="btn btn-primary">Login</a>
+                      <a href="{% url "users:signup" %}" class="btn btn-primary">Signup</a>
                       {% endif %}
                   </div>
               </div>
