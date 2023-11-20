@@ -14,7 +14,7 @@ class Food(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10000000, decimal_places=2)
+    price = models.DecimalField(max_digits=100000, decimal_places=2)
     address = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=17)
     tg_username = models.CharField(max_length=100)
