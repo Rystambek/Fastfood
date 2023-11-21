@@ -21,6 +21,9 @@ class Food(models.Model):
     def __str__(self):
         return str(self.title)
     
+    class Meta:
+        ordering = ['-id']
+    
 
 class FoodImage(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
