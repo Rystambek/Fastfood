@@ -22,6 +22,8 @@ def new_food(request):
             return redirect('main:index')
         return render(request, 'new_foods.html', {'form':form})
     
+    
+    
 def food_detail(request, food_id):
     food = get_object_or_404(Food, id= food_id)
     return render(request, 'details_food.html', {'food':food})
@@ -47,3 +49,16 @@ def food_update(request, food_id):
         else:
             messages.error(request, 'Access danied')
             return redirect('main:index')
+        
+
+def food_delete(request, food_id):
+    food = get_object_or_404(Food, id=food_id)
+    if request.user==food.author:
+        if request.method=='POST':
+            food.delete()
+            messages.info(request, 'Successfully deleted!')
+            return redirect('main:index')
+        return render(request, 'delete_food.html', {'food':food})
+    else:
+        messages.error(request, 'Access danied')
+        return redirect('main:index')
