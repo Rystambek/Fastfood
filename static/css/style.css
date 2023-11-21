@@ -79,3 +79,21 @@ body{ background:url(https://images.unsplash.com/photo-1495195129352-aeb325a55b6
   justify-content:center;
   align-items:center;
 }
+
+.kn1 {
+  background: rgba(0,0,0,0.5);
+  padding: 2px;
+}
+
+.kn2 {
+  background: rgba(0,0,0,0.5);
+  padding: 2px;
+}
+.kn3 {
+  background: rgba(0,0,0,0.5);
+  padding: 2px;
+}
+.kn4 {
+  background: rgba(0,0,0,0.5);
+  padding: 5px;
+}

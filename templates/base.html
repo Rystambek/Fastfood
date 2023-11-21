@@ -22,7 +22,7 @@
 
                   <div class="navbar-collapse collapse" id="mobile_menu">
                       <ul class="nav navbar-nav">
-                          <li class="active"><a href="#">Home</a></li>
+                          <li class="active"><a href="{% url 'main:index' %}">Home</a></li>
                           <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
                               <ul class="dropdown-menu">
                                 {% for i in categories %}
@@ -31,7 +31,7 @@
                               </ul>
                           </li>
                           <li><a href="#">Products</a></li>
-                          <li><a href="#">Add a menu</a></li>
+                          <li><a href="{% url 'foods:new' %}">Add a menu</a></li>
                       </ul>
                       <ul class="nav navbar-nav">
                           <li>
@@ -68,6 +68,19 @@
 
   <main>
     {% block content %}{% endblock content %}
+
+    <div class="container">
+        {% if messages %}
+        <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">
+            {% for message in messages %}
+            <div style="width: 20rem; opacity: 0.9;" class="m-3 alert alert-{{message.tags}}" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+     
   </main>
 
   {% block link %}
