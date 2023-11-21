@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block link %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}" /> {% endcomment %}
 {% endblock %}
 
 {% block <title> %}
@@ -22,7 +22,7 @@
                             <h2>{{customuser.get_full_name}}</h2>
                             <p class="text-muted">{{customuser.username}} | {{customuser.email}}</p>
                             {% if customuser == request.user %}
-                            <a class="btn btn-warning" href="#">Details</a>
+                            <a class="btn btn-warning" href="{% url 'users:update' %}">Details</a>
                             {% endif %}
                             <a class="btn btn-primary" href="mailto:{{customuser.email}}">Email</a>
                             <a class="btn btn-primary" href="tel:{{customuser.phone_number}}">Call</a>
@@ -37,6 +37,10 @@
             <h1>FOODS</h1>
             <p>Welcome to {{customuser}}</p>
               </div>
+              {% if not customuser.food_set.exists %}
+                <center class="text-muted" >There is no already</center>
+              {% endif %}
+
               {% for i in customuser.food_set.all %}
             <div class="container">
             <div class="card">
