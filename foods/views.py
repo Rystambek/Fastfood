@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import NewFoodForm
-from .models import FoodImage
+from .models import FoodImage, Food
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -18,3 +19,7 @@ def new_food(request):
             messages.success(request, "Successfully created!!!")
             return redirect('main:index')
         return render(request, 'new_foods.html', {'form':form})
+    
+def food_detail(request, food_id):
+    food = get_object_or_404(Food, id= food_id)
+    return render(request, 'details_food.html', {'food':food})
