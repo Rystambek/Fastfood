@@ -16,5 +16,4 @@ class CustomUser(AbstractUser):
 class Saved(models.Model):
     food = models.ForeignKey("foods.Food", on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    body = models.CharField(max_length=150)
     date = models.DateField(auto_now_add=True)

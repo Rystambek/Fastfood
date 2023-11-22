@@ -3,8 +3,9 @@ from .forms import SignupForm, UpdateProfileForm
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from .models import CustomUser
+from .models import CustomUser, Saved
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from foods.models import Food
 
 class SignupView(UserPassesTestMixin, View):
     def get(self, request):
@@ -36,3 +37,24 @@ class UpdateProfileView(LoginRequiredMixin, View):
             messages.success(request, 'Your account is successfully updated.')
             return redirect('users:profile', request.user)
         return render(request, 'registration/signup.html', {'form': form})
+    
+class BuyingView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request, food_id):
+        food = get_object_or_404(Food, id=food_id)
+        buy_food = Saved.objects.filter(author=request.user, food=food)
+        if buy_food:
+            buy_food.delete()
+            messages.info(request, 'Cancelled')
+        else:
+            Saved.objects.create(author=request.user, food=food)
+            messages.info(request, 'Buy a food.')
+        return redirect(request.META.get("HTTP_REFERER"))
+    
+
+class BuyFoodView(LoginRequiredMixin, View):
+    login_url = 'login'
+    def get(self, request):
+        saveds = Saved.objects.filter(author=request.user)
+        food = Food.objects.filter()
+        return render(request, 'buy_food.html', {'saveds':saveds})

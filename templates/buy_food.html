@@ -7,36 +7,36 @@
 {% endblock %}
 
 {% block title %}
-FASTFOOD
+FASTFOOD - Bay food {{request.user}}
 {% endblock title %}
 
 
 {% block content %}
 <div id="header">
-  <h1>FOODS</h1>
+  <h1>Bay food {{request.user}}</h1>
   <p>Welcome to restaurant</p>
     </div>
-    {% for i in foods %}
+    {% for i in saveds %}
   <div class="container">
   <div class="card">
     <div class="card-image">
-      {% if i.FoodImage.exists %}
-      <img src="{{i.FoodImage_set.all.first.image.url}}" alt="" >
+      {% if i.food.FoodImage.exists %}
+      <img src="{{i.food.FoodImage_set.all.first.image.url}}" alt="" >
       {% else %}
       <img src="https://images.unsplash.com/photo-1604135307399-86c6ce0aba8e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1374&q=80">
       {% endif %}
     </div>
     <div class="card-text">
       {% comment %} <p class="card-meal-type">Breakfast/Eggs</p> {% endcomment %}
-      <h2 class="card-title">{{i.title}}</h2>
+      <h2 class="card-title">{{i.food.title}}</h2>
       <p class="card-body">Eggs Benedict with hollandaise sauce, crispy bacon and an assortment of garden herbs.crispy bacon and an assortment of garden herbs.crispy bacon and an assortment of garden herbs.</p>
     </div>
-    <div class="card-price">$ {{i.price}}</div>
+    <div class="card-price">$ {{i.food.price}}</div>
     <div>
-      <button class="kn1"><a href="{% url 'foods:detail' i.id %}" >details</a></button>
-      <button class="kn2"><a href="{% url 'foods:update' i.id %}" >Update</a></button>
-      <button class="kn3"><a href="{% url 'foods:delete' i.id %}" >Delete</a></button>
-      <button class="kn4"><a href="{% url 'users:buyafood' i.id %}" >Buying</a></button>
+      <button class="kn1"><a href="{% url 'foods:detail' i.food.id %}" >details</a></button>
+      <button class="kn2"><a href="{% url 'foods:update' i.food.id %}" >Update</a></button>
+      <button class="kn3"><a href="{% url 'foods:delete' i.food.id %}" >Delete</a></button>
+      <button class="kn4"><a href="{% url 'users:buyafood' i.food.id %}" >Buying</a></button>
     </div>
   </div>
   {% endfor %}
