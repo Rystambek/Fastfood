@@ -33,10 +33,10 @@ FASTFOOD
     </div>
     <div class="card-price">$ {{i.price}}</div>
     <div>
-      <button class="kn1"><a href="{% url 'foods:detail' i.id %}" >details</a></button>
-      <button class="kn2"><a href="{% url 'foods:update' i.id %}" >Update</a></button>
-      <button class="kn3"><a href="{% url 'foods:delete' i.id %}" >Delete</a></button>
-      <button class="kn4"><a href="{% url 'users:buyafood' i.id %}" >Buying</a></button>
+      <a class="btn btn-outline-primary" href="{% url 'foods:detail' i.id %}" >details</a>
+      <a class="btn btn-outline-primary" href="{% url 'foods:update' i.id %}" >Update</a>
+      <a class="btn btn-outline-primary" href="{% url 'foods:delete' i.id %}" >Delete</a>
+      <a class="btn btn-outline-primary" href="{% url 'users:buyafood' i.id %}" >Buying</a>
     </div>
   </div>
   {% endfor %}

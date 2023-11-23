@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm, UpdateProfileForm
 from django.views import View
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .models import CustomUser, Saved
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from foods.models import Food
 
-class SignupView(UserPassesTestMixin, View):
+
+class SignupView(SuccessMessageMixin, View):
     def get(self, request):
         return render(request, 'registration/signup.html', {'form': SignupForm()})
     
@@ -18,6 +21,7 @@ class SignupView(UserPassesTestMixin, View):
             messages.success(request, 'Your account is successfully created.')
             return redirect('login')
         return render(request, 'registration/signup.html', {'form': form})
+
     
 class ProfileView(View):
     def get(self, request, username):
