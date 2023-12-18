@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block link %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 {% endblock %}
 
 {% block <title> %}
@@ -11,60 +11,100 @@
 
     {% block content %}
     
-        <div class="kontainer">
-            <div class="row">
-                <div class="col-12 card mt-5">
-                    <div class="row">
-                        <div class="col-2 m-3">
-                            <img class="img-thumbnail" width="150" height="150" src="{{customuser.avatar.url}}" alt="images">
-                        </div>
-                        <div class="col-8 m-3">
-                            <h2>{{customuser.get_full_name}}</h2>
-                            <p class="text-muted">{{customuser.username}} | {{customuser.email}}</p>
-                            {% if customuser == request.user %}
-                            <a class="btn btn-warning" href="{% url 'users:update' %}">Details</a>
-                            {% endif %}
-                            <a class="btn btn-primary" href="mailto:{{customuser.email}}">Email</a>
-                            <a class="btn btn-primary" href="tel:{{customuser.phone_number}}">Call</a>
-                            <a class="btn btn-primary" href="http://t.me/@{{customuser.tg_username}}">Telegram</a>
-                        </div>
+    <hr>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+          <div class="text-center">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            
+            <input type="file" class="form-control">
+          </div>
+        </div>
+        
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+          <div class="alert alert-info alert-dismissable">
+            {% comment %} <a class="panel-close close" data-dismiss="alert">×</a> 
+            <i class="bg-success"></i>Succesfully</div> {% endcomment %}
+          <h3>About me</h3>
+          
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="col-lg-3 control-label">First name</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="{{customuser.get_full_name}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Last name</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="{{customuser.username}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Company:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="IT park">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Email:</label>
+              <div class="col-lg-8">
+                <input class="form-control" type="text" value="{{customuser.email}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-3 control-label">Time Zone:</label>
+              <div class="col-lg-8">
+                <div class="ui-select">
+                  <select id="user_time_zone" class="form-control">
+                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                    <option value="Alaska">(GMT-09:00) Alaska</option>
+                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                    <option value="Arizona">(GMT-07:00) Arizona</option>
+                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                  </select>
+                </div>
+                {% if customuser == request.user %}
+                        <a class="btn btn-warning" href="{% url 'users:update' %}">Details</a>
+                        {% endif %}
+                        <a class="btn btn-primary" href="mailto:{{customuser.email}}">Email</a>
+                        <a class="btn btn-primary" href="tel:{{customuser.phone_number}}">Call</a>
+                        <a class="btn btn-primary" href="http://t.me/@{{customuser.tg_username}}">Telegram</a>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  <hr>
+    
+    {% endblock content %}
+    
+    
+    {% comment %} <div class="kontainer">
+        <div class="row">
+            <div class="col-12 card mt-5">
+                <div class="row">
+                    <div class="col-2 m-3">
+                        <img class="img-thumbnail" width="150" height="150" src="{{customuser.avatar.url}}" alt="images">
+                    </div>
+                    <div class="col-8 m-3">
+                        <h2>{{customuser.get_full_name}}</h2>
+                        <p class="text-muted">{{customuser.username}} | {{customuser.email}}</p>
+                        {% if customuser == request.user %}
+                        <a class="btn btn-warning" href="{% url 'users:update' %}">Details</a>
+                        {% endif %}
+                        <a class="btn btn-primary" href="mailto:{{customuser.email}}">Email</a>
+                        <a class="btn btn-primary" href="tel:{{customuser.phone_number}}">Call</a>
+                        <a class="btn btn-primary" href="http://t.me/@{{customuser.tg_username}}">Telegram</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="header">
-            <h1>FOODS</h1>
-            <p>Welcome to {{customuser}}</p>
-              </div>
-              {% if not customuser.food_set.exists %}
-                <center class="text-muted" >There is no already</center>
-              {% endif %}
-
-              {% for i in customuser.food_set.all %}
-            <div class="container">
-            <div class="card">
-              <div class="card-image">
-                {% if i.FoodImage.exists %}
-                <img src="{{i.FoodImage_set.all.first.image.url}}" alt="" >
-                {% else %}
-                <img src="https://images.unsplash.com/photo-1604135307399-86c6ce0aba8e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1374&q=80">
-                {% endif %}
-              </div>
-              <div class="card-text">
-                {% comment %} <p class="card-meal-type">Breakfast/Eggs</p> {% endcomment %}
-                <h2 class="card-title">{{i.title}}</h2>
-                <p class="card-body">Eggs Benedict with hollandaise sauce, crispy bacon and an assortment of garden herbs.crispy bacon and an assortment of garden herbs.crispy bacon and an assortment of garden herbs.</p>
-              </div>
-              <div class="card-price">$ {{i.price}}</div>
-              <div>
-                <a href="#" class="btn btn-outline-primary">details</a>
-                <a href="{% url 'foods:update' %}" class="btn btn-outline-primary">Update</a>
-                <a href="{% url 'foods:delete' %}" class="btn btn-outline-primary">Delete</a>
-              </div>
-            </div>
-            {% endfor %}
-            
-            </div>
-
-    {% endblock content %}
+    </div> {% endcomment %}
+    

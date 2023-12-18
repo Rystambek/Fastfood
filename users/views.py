@@ -27,6 +27,7 @@ class ProfileView(View):
     def get(self, request, username):
         user = get_object_or_404(CustomUser, username=username)
         return render(request, 'profile.html', {'customuser':user})
+        pass
     
 class UpdateProfileView(LoginRequiredMixin, View):
     login_url = 'login'
@@ -41,6 +42,9 @@ class UpdateProfileView(LoginRequiredMixin, View):
             messages.success(request, 'Your account is successfully updated.')
             return redirect('users:profile', request.user)
         return render(request, 'registration/signup.html', {'form': form})
+    
+    
+    
     
 class BuyingView(LoginRequiredMixin, View):
     login_url = "login"

@@ -8,6 +8,7 @@ django-bootstrap5 = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 django-jazzmin = "*"
+django-use-email-as-username = "*"
 
 [dev-packages]
 

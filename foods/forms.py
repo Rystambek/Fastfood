@@ -3,9 +3,11 @@ from django import forms
 
 class NewFoodForm(forms.ModelForm):
     # images = forms.ImageField(widget=forms.MultipleHiddenInput(attrs={'multiple': True}))
+    image = forms.ImageField(required=False, label="Food image",
+                             help_text="Please upload food image")
     class Meta:
         model = Food
-        fields = ('title', 'description', 'price', 'category', 'phone_number')
+        fields = ('title', 'description', 'price', 'category', 'phone_number', 'image')
 
     def save(self, request, commit=True):
         food = self.instance
@@ -15,6 +17,9 @@ class NewFoodForm(forms.ModelForm):
     
 class FoodForm(forms.ModelForm):
     # images = forms.ImageField(widget=forms.MultipleHiddenInput(attrs={'multiple': True}))
+    image = forms.ImageField(required=False, label="Food image",
+                             help_text="Please upload food image")
+    
     class Meta:
         model = Food
-        fields = ('title', 'description', 'price', 'category', 'phone_number')
+        fields = ('title', 'description', 'price', 'category', 'phone_number', 'image')
