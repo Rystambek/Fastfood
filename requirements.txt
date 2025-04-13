@@ -5,3 +5,4 @@ django-crispy-forms>=2.4
 crispy-bootstrap5>=2025.4
 Pillow>=10.2.0  # For image handling
 python-dotenv>=1.0.1  # For environment variables 
+gunicorn>=20.0.4
