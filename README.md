@@ -12,8 +12,8 @@
     <p>Biz 10:00 dan 22:00 gacha ochiq.</p>
     <p>Biz dushanbadan chiqariladi.</p>
     <p>Bizning saytimizda taomlar haqida ma'lumotlarni ko'rish uchun <a href="https://fastfood.uz">fastfood.uz</a> saytiga o'tishingiz mumkin.</p>
-    <img src="1.jpg" alt="">
-    <img src="2.jpg" alt="">
+    <img src="1.png" alt="">
+    <img src="2.png" alt="">
 
 </body>
 </html>
