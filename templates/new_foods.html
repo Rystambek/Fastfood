@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Add New Food Item</h4>
+                    <h4 class="mb-0">Yangi taom qo'shish</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" id="foodForm">
@@ -17,10 +17,10 @@
                         
                         <!-- Main Food Form -->
                         <div class="mb-4">
-                            <h5 class="mb-3">Food Information</h5>
+                            <h5 class="mb-3">Taom ma'lumotlari</h5>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="id_title" class="form-label">Title</label>
+                                    <label for="id_title" class="form-label">Taom nomi</label>
                                     {{ form.title }}
                                     {% if form.title.errors %}
                                         <div class="invalid-feedback d-block">
@@ -32,10 +32,10 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="id_category" class="form-label">Category</label>
                                     <select name="category" id="id_category" class="form-select">
-                                        <option value="">Select a category</option>
+                                        <option value="" class="text-muted">Select a category</option>
                                         {% for category in form.category.field.choices %}
                                             {% if category.0 %}
-                                                <option value="{{ category.0 }}" {% if form.category.value == category.0 %}selected{% endif %}>
+                                                <option value="{{ category.0 }}" {% if form.category.value == category.0 %}selected{% endif %} class="text-dark">
                                                     {{ category.1 }}
                                                 </option>
                                             {% endif %}
@@ -85,9 +85,9 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="id_main_image" class="form-label">Main Image</label>
+                                <label for="id_main_image" class="form-label">Asosiy rasm</label>
                                 {{ form.main_image }}
-                                <div class="form-text">Upload a main image for your food item (max 5MB)</div>
+                                <div class="form-text">Taom uchun asosiy rasm yuklash (max 5MB)</div>
                                 {% if form.main_image.errors %}
                                     <div class="invalid-feedback d-block">
                                         {{ form.main_image.errors }}
@@ -98,11 +98,11 @@
                         
                         <!-- Additional Images Form -->
                         <div class="mb-4">
-                            <h5 class="mb-3">Additional Images</h5>
+                            <h5 class="mb-3">Qo'shimcha rasm</h5>
                             <div class="mb-3">
-                                <label for="id_images" class="form-label">Select Multiple Images</label>
+                                <label for="id_images" class="form-label">Ko'p rasm tanlash</label>
                                 {{ image_form.images }}
-                                <div class="form-text">You can select multiple images (max 5MB each)</div>
+                                <div class="form-text">Ko'p rasm tanlash (max 5MB)</div>
                                 {% if image_form.images.errors %}
                                     <div class="invalid-feedback d-block">
                                         {{ image_form.images.errors }}
@@ -112,8 +112,8 @@
                         </div>
                         
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Create Food Item</button>
-                            <a href="{% url 'main:index' %}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Taom qo'shish</button>
+                            <a href="{% url 'main:index' %}" class="btn btn-secondary">Bekor qilish</a>
                         </div>
                     </form>
                 </div>
@@ -137,6 +137,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const categorySelect = document.getElementById('id_category');
     if (categorySelect) {
         categorySelect.classList.add('form-select');
+        // Add custom styling for options
+        const options = categorySelect.querySelectorAll('option');
+        options.forEach(option => {
+            if (option.value === '') {
+                option.classList.add('text-muted');
+            } else {
+                option.classList.add('text-dark');
+            }
+        });
     }
     
     // Preview main image
@@ -169,5 +178,72 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<style>
+/* Custom styling for the category select */
+#id_category {
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    color: #495057;
+    transition: all 0.2s ease-in-out;
+}
+
+#id_category:hover {
+    border-color: #80bdff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#id_category:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#id_category option {
+    padding: 8px;
+    background-color: transparent;
+    color: #495057;
+}
+
+#id_category option:not(:first-child) {
+    color: #495057;
+    background-color: transparent;
+}
+
+#id_category option:first-child {
+    color: #6c757d;
+    background-color: transparent;
+}
+
+#id_category option:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Additional form styling */
+.form-control, .form-select {
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    color: #495057;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #80bdff;
+    color: #495057;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    color: #495057;
+}
+</style>
 {% endblock %}
 {% endblock %}
