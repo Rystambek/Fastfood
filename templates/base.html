@@ -6,93 +6,421 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fastfood - Your favorite food delivery service">
+    <meta name="keywords" content="food, delivery, restaurant, fastfood">
     <title>{% block title %}Fastfood{% endblock title %}</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-image: url('https://cdn-1.aki.kg/cdn-st-0/qd1/F/1633066.3326c0d09d044c45bdf8f588dd1cfb69.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            position: relative;
+            color: #fff;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .thumbnail {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: none;
+            border-radius: 0;
+            margin-bottom: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: bold;
+        }
+        
+        .navbar-nav > li > a {
+            color: #fff !important;
+        }
+        
+        .navbar-nav > li > a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .dropdown-menu {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown-menu > li > a {
+            color: #fff !important;
+            padding: 10px 20px;
+        }
+
+        .dropdown-menu > li > a:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-success {
+            color: #000 !important;
+        }
+
+        .panel-heading {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff;
+        }
+
+        .caption {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 0 0 12px 12px;
+            padding: 15px;
+            color: #fff;
+        }
+
+        .alert {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-group-addon {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        .help-block {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .label {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .list-group-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .list-group-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .well {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .jumbotron {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .table {
+            color: #fff;
+        }
+
+        .table > tbody > tr > td,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > td,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > thead > tr > th {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close {
+            color: #fff;
+            opacity: 0.7;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .custom-file-upload {
+            margin-bottom: 1rem;
+        }
+
+        .custom-file-upload input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-progress {
+            margin: 0.5rem 0;
+        }
+
+        .progress {
+            height: 1.5rem;
+            margin-bottom: 0.5rem;
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        .upload-status {
+            font-size: 0.875rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        .current-files {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 0.25rem;
+        }
+
+        .current-files ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .file-input-info {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .help-text {
+            margin: 0.25rem 0;
+        }
+
+        .upload-messages {
+            margin-top: 0.5rem;
+        }
+
+        .alert {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+    {% block link %}{% endblock %}
+    {% block style %}{% endblock %}
 </head>
 <body>
-<div class="navbar navbar-inverse">
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-lg-12">
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="{% url 'main:index' %}" class="navbar-brand">FASTFOOD</a>
+                    </div>
 
-                  <div class="navbar-header">
-                      <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                      <a href="#" class="navbar-brand">FASTFOOD</a>
-                  </div>
-
-                  <div class="navbar-collapse collapse" id="mobile_menu">
-                      <ul class="nav navbar-nav">
-                          <li class="active"><a href="{% url 'main:index' %}">Home</a></li>
-                          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                {% for i in categories %}
-                                  <li><a href="{% url "main:category" i.name %}">{{i.name}}</a></li>
-                                  {% endfor %}
-                              </ul>
-                          </li>
-                          <li><a href="{% url 'users:buyed' %}">Buying🛒</a></li>
-                          <li><a href="{% url 'foods:new' %}">Add a menu</a></li>
-                      </ul>
-                      <ul class="nav navbar-nav">
-                          <li>
-                              <form action="" class="navbar-form">
-                                  <div class="form-group">
-                                      <div class="input-group">
-                                          <input type="search" name="search" id="" placeholder="Search..." class="form-control">
-                                          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                                      </div>
-                                  </div>
-                              </form>
-                          </li>
-                      </ul>
-                      <ul class="nav navbar-nav navbar-right">
-                          <li><a href="{% url 'users:Profile' username='foousername' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                          {% if request.user.is_authenticated %}
-                          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Logout <span class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                  <li><a href="{% url "users:signup" %}">Logout</a></li>
-                              </ul>
-                          </li>
-                      </ul>
-                      {% else %}
-                      <li><a href="{% url "login" %}">Login</a></li>
-                      <li><a href="{% url "users:signup" %}">Sign Up</a></li>
-                      {% endif %}
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-
-  <main>
-    {% block content %}{% endblock content %}
-
-    <div class="container">
-        {% if messages %}
-        <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">
-            {% for message in messages %}
-            <div style="width: 20rem; opacity: 0.9;" class="m-3 alert alert-{{message.tags}}" role="alert">
-                {{message}}
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{% url 'main:index' %}">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    {% for category in categories %}
+                                        <li><a href="{% url 'main:category' category.name %}">{{ category.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'users:buyed' %}">Buying <i class="fas fa-shopping-cart"></i></a></li>
+                            {% if user.is_authenticated and user.is_superuser %}
+                            <li><a href="{% url 'foods:new' %}">Add a menu</a></li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form action="{% url 'main:index' %}" class="navbar-form" method="GET">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" name="search" placeholder="Search..." class="form-control">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'users:Profile' user.username %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                <li>
+                                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" style="background: none; border: none; padding: 15px; color: #fff;">
+                                            <span class="glyphicon glyphicon-log-out"></span> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            {% else %}
+                                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                <li><a href="{% url 'users:signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
         </div>
-        {% endif %}
     </div>
-     
-  </main>
 
+    <main>
+        {% block content %}{% endblock content %}
 
-  
+        {% if messages %}
+            <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">
+                {% for message in messages %}
+                    <div style="width: 20rem; opacity: 0.9;" class="m-3 alert alert-{{message.tags}}" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </main>
 
-  {% block link %}
-
-    {% endblock %}
-
-    {% block style %}
-
-    {% endblock %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

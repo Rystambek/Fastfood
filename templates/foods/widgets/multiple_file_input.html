@@ -1,0 +1,37 @@
+{% load i18n %}
+<div class="custom-file-upload">
+    <input type="{{ widget.type }}" name="{{ widget.name }}" 
+           {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}
+           {% include "django/forms/widgets/attrs.html" %}
+           data-url="{% url 'foods:upload_images' %}">
+    
+    <div class="upload-progress" style="display: none;">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+        <div class="upload-status"></div>
+    </div>
+    
+    {% if widget.is_initial %}
+        <div class="current-files">
+            <p>{% trans "Currently:" %}</p>
+            {% if widget.value %}
+                {% if widget.value|length > 1 %}
+                    <ul>
+                        {% for file in widget.value %}
+                            <li>{{ file.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>{{ widget.value.0.name }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <div class="file-input-info">
+        <p class="help-text">{% trans "Select multiple images (PNG, JPG, JPEG)" %}</p>
+    </div>
+    
+    <div class="upload-messages"></div>
+</div> 
