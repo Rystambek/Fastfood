@@ -53,6 +53,7 @@
                                 {% endif %}
                             {% endif %}
                         </div>
+                        
                         <div class="col-md-6">
                             <div class="well">
                                 <h3 style="color: #fff;">Price: ${{ food.price }}</h3>
@@ -72,7 +73,31 @@
                                             <i class="fas fa-trash"></i> Delete
                                         </a>
                                     {% endif %}
+                                    
                                 </div>
+                                <h3>Fikrlar</h3>
+{% for feedback in feedbacks %}
+    <div class="card mb-2 p-2">
+        <strong>{{ feedback.user.username }}</strong> - 
+        {{ feedback.rating }} ⭐
+        <p>{{ feedback.comment }}</p>
+        <small>{{ feedback.created_at }}</small>
+    </div>
+{% empty %}
+    <p>Hozircha fikrlar yo‘q.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ feedback_form.as_p }}
+        <button type="submit" class="btn btn-primary">Fikr qoldirish</button>
+    </form>
+{% else %}
+    <p>Fikr qoldirish uchun <a href="{% url 'login' %}">ro‘yxatdan o‘ting</a>.</p>
+{% endif %}
+
+
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import Comment, Category, Food, FoodImage
+from .models import Feedback
+
+admin.site.register(Feedback)
 
 # Register your models here.
 

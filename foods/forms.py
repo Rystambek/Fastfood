@@ -2,6 +2,16 @@ from django import forms
 from .models import Food, FoodImage, Category
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
+from .models import Feedback
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['comment', 'rating']
+        widgets = {
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Fikringizni yozing...', 'rows': 3}),
+            'rating': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5})
+        }
 
 class MultipleFileInput(forms.ClearableFileInput):
     """

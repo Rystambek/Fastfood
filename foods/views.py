@@ -10,6 +10,36 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .forms import FeedbackForm
+from .models import Feedback
+
+def food_detail(request, food_id):
+    food = get_object_or_404(Food, id=food_id)
+    similar_foods = Food.objects.filter(category=food.category).exclude(id=food.id)[:3]
+    feedbacks = food.feedbacks.all().order_by('-created_at')
+
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request, "Fikr qoldirish uchun ro‘yxatdan o‘ting.")
+            return redirect('login')
+        
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.user = request.user
+            feedback.food = food
+            feedback.save()
+            messages.success(request, "Fikringiz yuborildi!")
+            return redirect('food_detail', food_id=food.id)
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'details_food.html', {
+        'food': food,
+        'similar_foods': similar_foods,
+        'feedbacks': feedbacks,
+        'feedback_form': form
+    })
 
 # Create your views here.
 

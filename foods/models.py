@@ -3,6 +3,7 @@ from users.models import CustomUser
 from django.core.validators import FileExtensionValidator
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
 
@@ -74,3 +75,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return "Comment of" + str(self.author.username)
+    
+class Feedback(models.Model):
+    food = models.ForeignKey('Food', on_delete=models.CASCADE, related_name='feedbacks')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    comment = models.TextField()
+    rating = models.IntegerField(default=5)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.food.title}"
